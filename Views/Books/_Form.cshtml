@@ -1,0 +1,12 @@
+@model Book
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="Id" />
+<div class="mb-3"><label asp-for="Title" class="form-label"></label><input asp-for="Title" class="form-control" /><span asp-validation-for="Title" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Author" class="form-label"></label><input asp-for="Author" class="form-control" /><span asp-validation-for="Author" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Category" class="form-label"></label><input asp-for="Category" class="form-control" /><span asp-validation-for="Category" class="text-danger"></span></div>
+<div class="row">
+    <div class="col-md-4 mb-3"><label asp-for="Price" class="form-label"></label><input asp-for="Price" class="form-control" /><span asp-validation-for="Price" class="text-danger"></span></div>
+    <div class="col-md-4 mb-3"><label asp-for="PublishedYear" class="form-label"></label><input asp-for="PublishedYear" class="form-control" /><span asp-validation-for="PublishedYear" class="text-danger"></span></div>
+    <div class="col-md-4 mb-3"><label asp-for="Quantity" class="form-label"></label><input asp-for="Quantity" class="form-control" /><span asp-validation-for="Quantity" class="text-danger"></span></div>
+</div>
+<div class="mb-3"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" rows="3" class="form-control"></textarea><span asp-validation-for="Description" class="text-danger"></span></div>

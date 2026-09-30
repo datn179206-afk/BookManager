@@ -1,0 +1,9 @@
+@model Book
+@{ ViewData["Title"] = "Xóa sách"; }
+<h2>Xóa sách</h2>
+<div class="alert alert-danger">Bạn có chắc muốn xóa cuốn <strong>@Model.Title</strong> của <strong>@Model.Author</strong>?</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Xóa</button>
+    <a class="btn btn-secondary" asp-action="Index">Hủy</a>
+</form>
