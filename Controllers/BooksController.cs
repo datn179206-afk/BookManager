@@ -28,7 +28,7 @@ public class BooksController : Controller
     }
 
     // CREATE
-    public IActionResult Create() => View();
+    public IActionResult Create() => View(new Book());
 
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Book book)
