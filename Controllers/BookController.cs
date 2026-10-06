@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookManager.Controllers;
 
-public class BooksController : Controller
+public class BookController : Controller
 {
     private readonly AppDbContext _db;
-    public BooksController(AppDbContext db) => _db = db;
+    public BookController(AppDbContext db) => _db = db;
 
     // READ (danh sách + tìm kiếm)
     public async Task<IActionResult> Index(string? search)
@@ -21,7 +21,7 @@ public class BooksController : Controller
     }
 
     // READ (chi tiết)
-    public async Task<IActionResult> Details(int? id)
+    public async Task<IActionResult> Detail(int? id)
     {
         var book = id == null ? null : await _db.Books.FindAsync(id);
         return book == null ? NotFound() : View(book);

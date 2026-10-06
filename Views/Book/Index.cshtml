@@ -27,7 +27,7 @@
             <td>@b.Price.ToString("N0")</td>
             <td>@b.Quantity</td>
             <td class="text-end">
-                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@b.Id">Chi tiết</a>
+                <a class="btn btn-sm btn-info" asp-action="Detail" asp-route-id="@b.Id">Chi tiết</a>
                 <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@b.Id">Sửa</a>
                 <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@b.Id">Xóa</a>
             </td>

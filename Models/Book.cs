@@ -20,7 +20,7 @@ public class Book
     [Display(Name = "Thể loại")]
     public string? Category { get; set; }
 
-    [Range(0, 100000000, ErrorMessage = "Giá không hợp lệ")]
+    [Range(1, 100000000, ErrorMessage = "Giá phải lớn hơn 0")]
     [Display(Name = "Giá (VNĐ)")]
     public decimal Price { get; set; }
 
