@@ -10,5 +10,15 @@
     <dt class="col-sm-3">Số lượng</dt><dd class="col-sm-9">@Model.Quantity</dd>
     <dt class="col-sm-3">Mô tả</dt><dd class="col-sm-9">@Model.Description</dd>
 </dl>
+@if (Model.Images.Any())
+{
+    <h5>Hình ảnh</h5>
+    <div class="d-flex flex-wrap gap-3 mb-3">
+        @foreach (var img in Model.Images)
+        {
+            <img src="@img.Url" class="img-thumbnail" style="max-height:220px" />
+        }
+    </div>
+}
 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Sửa</a>
 <a class="btn btn-secondary" asp-action="Index">Quay lại</a>

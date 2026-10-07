@@ -1,6 +1,7 @@
 using System.Globalization;
 using BookManager.Data;
 using BookManager.Middlewares;
+using BookManager.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ CultureInfo.DefaultThreadCurrentCulture = culture;
 CultureInfo.DefaultThreadCurrentUICulture = culture;
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ImageService>();
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -28,5 +30,6 @@ app.UseRouting();
 // Middleware ghi log + chặn id không hợp lệ (phải đặt TRƯỚC MapControllerRoute)
 app.UseMiddleware<RequestLoggingMiddleware>();
 
+app.MapControllers(); // bật các API dùng attribute routing (/api/book)
 app.MapControllerRoute(name: "default", pattern: "{controller=Book}/{action=Index}/{id?}");
 app.Run();

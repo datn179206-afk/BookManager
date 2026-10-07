@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace BookManager.Middlewares;
 
 public class RequestLoggingMiddleware
@@ -15,6 +17,7 @@ public class RequestLoggingMiddleware
         var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"); // .fff = milliseconds
         var method = context.Request.Method;
         var path = context.Request.Path.ToString();
+        var stopwatch = Stopwatch.StartNew(); // đo thời gian xử lý (ms)
 
         Console.WriteLine($"[{time}] Method: {method} - Path: {path}");
 
@@ -25,7 +28,7 @@ public class RequestLoggingMiddleware
             context.Response.ContentType = "text/plain; charset=utf-8";
             await context.Response.WriteAsync("Book id không hợp lệ");
 
-            Console.WriteLine($"Status Code: {context.Response.StatusCode}");
+            Console.WriteLine($"Status Code: {context.Response.StatusCode} - {stopwatch.ElapsedMilliseconds} ms");
             return; // không gọi _next => request KHÔNG đi tiếp vào Controller
         }
 
@@ -33,7 +36,7 @@ public class RequestLoggingMiddleware
         await _next(context);
 
         // ===== Chức năng 2: ghi log status code (SAU khi xử lý xong) =====
-        Console.WriteLine($"Status Code: {context.Response.StatusCode}");
+        Console.WriteLine($"Status Code: {context.Response.StatusCode} - {stopwatch.ElapsedMilliseconds} ms");
     }
 
     // Đúng dạng /Book/Detail/{id} và id là số <= 0 thì không hợp lệ

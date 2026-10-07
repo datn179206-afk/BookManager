@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace BookManager.Models;
 
@@ -35,4 +36,8 @@ public class Book
     [StringLength(1000)]
     [Display(Name = "Mô tả")]
     public string? Description { get; set; }
+
+    // Danh sách hình ảnh của sách (1 hoặc nhiều ảnh)
+    [ValidateNever]
+    public List<BookImage> Images { get; set; } = new();
 }

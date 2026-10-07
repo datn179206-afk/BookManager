@@ -31,6 +31,26 @@ namespace BookManager.Migrations
                     table.PrimaryKey("PK_Books", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BookImages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookImages_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Books",
                 columns: new[] { "Id", "Author", "Category", "Description", "Price", "PublishedYear", "Quantity", "Title" },
@@ -39,11 +59,19 @@ namespace BookManager.Migrations
                     { 1, "Tô Hoài", "Thiếu nhi", null, 55000m, 1941, 20, "Dế Mèn phiêu lưu ký" },
                     { 2, "Robert C. Martin", "Lập trình", null, 320000m, 2008, 10, "Clean Code" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookImages_BookId",
+                table: "BookImages",
+                column: "BookId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BookImages");
+
             migrationBuilder.DropTable(
                 name: "Books");
         }

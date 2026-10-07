@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookManager.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260930022247_InitialCreate")]
+    [Migration("20261007012244_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -84,6 +84,44 @@ namespace BookManager.Migrations
                             Quantity = 10,
                             Title = "Clean Code"
                         });
+                });
+
+            modelBuilder.Entity("BookManager.Models.BookImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookImages");
+                });
+
+            modelBuilder.Entity("BookManager.Models.BookImage", b =>
+                {
+                    b.HasOne("BookManager.Models.Book", "Book")
+                        .WithMany("Images")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("BookManager.Models.Book", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

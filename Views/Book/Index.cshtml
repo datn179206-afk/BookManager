@@ -14,13 +14,22 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>Tên sách</th><th>Tác giả</th><th>Thể loại</th><th>Giá (VNĐ)</th><th>Số lượng</th><th></th>
+            <th>Hình ảnh</th><th>Tên sách</th><th>Tác giả</th><th>Thể loại</th><th>Giá (VNĐ)</th><th>Số lượng</th><th></th>
         </tr>
     </thead>
     <tbody>
     @foreach (var b in Model)
     {
+        var first = b.Images.FirstOrDefault();
         <tr>
+            <td>
+                @if (first != null)
+                {
+                    <img src="@first.Url" alt="@b.Title" class="rounded" style="height:60px;width:60px;object-fit:cover" />
+                    @if (b.Images.Count > 1) { <span class="badge bg-secondary">+@(b.Images.Count - 1)</span> }
+                }
+                else { <span class="text-muted">—</span> }
+            </td>
             <td>@b.Title</td>
             <td>@b.Author</td>
             <td>@b.Category</td>
